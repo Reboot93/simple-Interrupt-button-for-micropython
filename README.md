@@ -41,4 +41,4 @@ Button(pin, single_click_time=130, long_press_time=210, pull=Pin.PULL_UP, trigge
 | argument       | description           | value |
 |-------------|-------------|-----------|  
 |pin|Interrupt pin|int|
-|msg|single click or long press|single click(msg 0), long press(msg 1)|
+|msg|single click or long press|int: single click 0, long press 1|
