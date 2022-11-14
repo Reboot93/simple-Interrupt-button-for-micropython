@@ -36,3 +36,9 @@ Button(pin, single_click_time=130, long_press_time=210, pull=Pin.PULL_UP, trigge
 |long_press_time|Long press the maximum duration|int|
 |pull|Pin pull-up or pull-down|Pin.PULL_UP or Pin.PULL_DOWN|
 |trigger|Interrupt trigger mode|According to different master controllers|
+
+## Callback
+| argument       | description           | value |
+|-------------|-------------|-----------|  
+|pin|Interrupt pin|int|
+|msg|single click or long press|single click(msg 0), long press(msg 1)|
