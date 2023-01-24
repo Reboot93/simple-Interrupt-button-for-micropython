@@ -54,10 +54,10 @@ Button(pin, single_click_time=130, long_press_time=210, pull=Pin.PULL_UP, trigge
 
 | Optional argument       | description           | value |
 |-------------|-------------|-----------|  
-|short_press_time|Click Maximum Duration|int|
-|long_press_time|Long press the maximum duration|int|
-|pull|Pin pull-up or pull-down|Pin.PULL_UP or Pin.PULL_DOWN|
-|trigger|Interrupt trigger mode|According to different master controllers|
+|short_press_time 短按时间|Click Maximum Duration (The actual time depends on the timer interval)|int|
+|long_press_time 长按时间|Long press the maximum duration (The actual time depends on the timer interval))|int|
+|pull 上下拉|Pin pull-up or pull-down|Pin.PULL_UP or Pin.PULL_DOWN|
+|trigger 上下沿触发|Interrupt trigger mode|According to different master controllers|
 
 ## Callback
 | argument       | description           | value |
