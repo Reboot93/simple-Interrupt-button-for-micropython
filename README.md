@@ -1,6 +1,8 @@
 # simple-Interrupt-button-for-micropython
 Micropython Button Class Based on Hardware Interrupt and Timer
 用于 micropython 的简单中断按钮类，使用Timer
+能够实现与分配定时器数量相同个数的按键同时检测，空闲按键数量不受定时器数量限制
+It can realize simultaneous detection of keys with the same number as the number of allocated timers. The number of idle keys is not limited by the number of timers
 
 ## Usage
 example: pin(25), pull=Pin.PULL_UP, trigger=Pin.IRQ_FALLING
