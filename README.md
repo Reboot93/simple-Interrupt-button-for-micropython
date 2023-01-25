@@ -50,7 +50,7 @@ class Button:
 Accept one required parameter and five optional parameters
 
 ``` python
-Button(pin, single_click_time=100, press_hold_time=350, pull=Pin.PULL_UP, trigger=Pin.IRQ_FALLING)
+Button(pin, single_click_time=100, press_hold_time=350, timer_interval=2, pull=Pin.PULL_UP, trigger=Pin.IRQ_FALLING)
 ```
 | argument       | description           | value |
 |-------------|-------------|-----------|  
