@@ -24,10 +24,10 @@ SOFTWARE.
 from machine import Pin, Timer
 
 
-# callback msg : 1: single click
-#                2: long click
-#                3: hold
-#                4: release
+# callback msg : 0: single click
+#                1: long click
+#                2: hold
+#                3: release
 
 
 class Button:
@@ -152,7 +152,7 @@ class Button:
                         self._long_press_timer.deinit()
                         print('Button %s release' % str(self.pin))
                         self._flag_hold = False
-                        self.callback(self.pin, 4)
+                        self.callback(self.pin, 3)
                     else:
                         self._timer_count += 1
                         return
@@ -160,7 +160,7 @@ class Button:
                     # 初次 进入hold判断
                     self._flag_hold = True
                     print('Button %s Hold' % str(self.pin))
-                    self.callback(self.pin, 3)
+                    self.callback(self.pin, 2)
                     self._timer_count += 1
                     return
             else:
