@@ -4,8 +4,12 @@
 
 能够实现与分配定时器数量相同个数的按键同时检测，空闲按键数量不受定时器数量限制
 
+可以检测：单击、长按、按住（通过告知 hold 与 release 实现）
+
 
 It can realize simultaneous detection of keys with the same number as the number of allocated timers. The number of idle keys is not limited by the number of timers
+
+Can be detected: click, hold and hold (realized by telling hold and release)
 
 ## Usage
 example: ESP32, pin(25), pull=Pin.PULL_DOWN, trigger=Pin.IRQ_RISING
@@ -41,12 +45,12 @@ class Button:
 ```
 
 
-接受一个必要参数，4个可选参数
+接受一个必要参数，5个可选参数
 
-Accept one required parameter and four optional parameters
+Accept one required parameter and five optional parameters
 
 ``` python
-Button(pin, single_click_time=130, long_press_time=210, pull=Pin.PULL_UP, trigger=Pin.IRQ_FALLING)
+Button(pin, single_click_time=100, press_hold_time=350, pull=Pin.PULL_UP, trigger=Pin.IRQ_FALLING)
 ```
 | argument       | description           | value |
 |-------------|-------------|-----------|  
@@ -54,13 +58,14 @@ Button(pin, single_click_time=130, long_press_time=210, pull=Pin.PULL_UP, trigge
 
 | Optional argument       | description           | value |
 |-------------|-------------|-----------|  
-|short_press_time 短按时间|Click Maximum Duration (The actual time depends on the timer interval)|int|
-|long_press_time 长按时间|Long press the maximum duration (The actual time depends on the timer interval))|int|
-|pull 上下拉|Pin pull-up or pull-down|Pin.PULL_UP or Pin.PULL_DOWN|
-|trigger 上下沿触发|Interrupt trigger mode|According to different master controllers|
+|short_press_time|短按上限时间      Short Click Maximum Duration (The actual time depends on the timer interval)|int|
+|press_hold_time|按住开始时间       Hold start duration (The actual time depends on the timer interval))|int|
+|timer_interval|定时器间隔 timer interval (ms)|int|
+|pull|上下拉 Pin pull-up or pull-down|Pin.PULL_UP or Pin.PULL_DOWN|
+|trigger|上下沿触发 Interrupt trigger mode|According to different master controllers|
 
 ## Callback
 | argument       | description           | value |
 |-------------|-------------|-----------|  
 |pin|Interrupt pin|int|
-|msg|short press or long press|int: short press 0, long press 1|
+|msg|short press\long press\hold\release |int: short press 0, long press 1, hold 2, release 3|
