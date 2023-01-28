@@ -52,7 +52,7 @@ class Button:
     def __init__(self, pin, single_click_time=100, press_hold_time=350, timer_interval=2, pull=Pin.PULL_DOWN,
                  trigger=Pin.IRQ_RISING):
         self.pin = pin
-        self.callback = None
+        self.callback = self.__default_callback
         self.isEnable = False
         self._short_press_time = single_click_time
         self._hold_time = press_hold_time
@@ -67,6 +67,9 @@ class Button:
             self._timer_bt_value = 1
         else:
             self._timer_bt_value = 0
+
+    def __default_callback(self, pin, msg):
+        pass
 
     def __get_available_timer(self):
         date_value = list(Button.timer_dict.values())
@@ -124,6 +127,7 @@ class Button:
     def _irq_callback(self, pin):
         self.button.irq(handler=None)
         if self.__setEnable(False) != 0:
+            # 调试用
             # print("No more timer, please wait for release")
             self.setEnable(True)
             return
@@ -136,21 +140,24 @@ class Button:
         if self.button.value() != self._timer_bt_value or self._timer_count > self._hold_time:
             # print(self._timer_count)
             if 5 < self._timer_count <= self._short_press_time:
-                # Single Click 
+                # Single Click
                 self._long_press_timer.deinit()
-                print('Button %s short press' % str(self.pin))
+                # 调试用
+                #print('Button %s short press' % str(self.pin))
                 self.callback(self.pin, 0)
             elif self._short_press_time < self._timer_count <= self._hold_time:
-                # Long Click 
+                # Long Click
                 self._long_press_timer.deinit()
-                print('Button %s long pressed' % str(self.pin))
+                # 调试用
+                #print('Button %s long pressed' % str(self.pin))
                 self.callback(self.pin, 1)
             elif self._timer_count > self._hold_time:
                 if self._flag_hold:
                     # 非初次 进入hold判断
                     if self.button.value() != self._timer_bt_value:
                         self._long_press_timer.deinit()
-                        print('Button %s release' % str(self.pin))
+                        # 调试用
+                        #print('Button %s release' % str(self.pin))
                         self._flag_hold = False
                         self.callback(self.pin, 3)
                     else:
@@ -159,7 +166,8 @@ class Button:
                 else:
                     # 初次 进入hold判断
                     self._flag_hold = True
-                    print('Button %s Hold' % str(self.pin))
+                    # 调试用
+                    #print('Button %s Hold' % str(self.pin))
                     self.callback(self.pin, 2)
                     self._timer_count += 1
                     return
