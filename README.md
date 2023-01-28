@@ -16,12 +16,19 @@ example: ESP32, pin(25), pull=Pin.PULL_DOWN, trigger=Pin.IRQ_RISING
 
 ``` python
 from button import Button
+from machine import Pin
 
 def button_callback(pin, msg):
   if msg == 0:
     print('Button Short Press | Pin: %s' % pin)
   elif msg == 1:
     print('Button Long Press | Pin: %s' % pin)
+
+
+# button = Button(25, pull=Pin.PULL_UP, trigger=Pin.IRQ_FALLING)
+# button = Button(25, pull=Pin.PULL_DOWN, trigger=Pin.IRQ_RISING)
+# default pull=Pin.PULL_DOWN, default tirgger=trigger=Pin.IRQ_RISING
+# keyword Button(pin, single_click_time=100, press_hold_time=350, timer_interval=2, pull=Pin.PULL_UP, trigger=Pin.IRQ_FALLING)
 
 button = Button(25)
 button.connect(button_callback)
